@@ -19,19 +19,20 @@ Wymagania:
 
 
 def verify_pesel(pesel: str) -> int:
-    """
-    Weryfikuje numer PESEL.
+    if len(pesel) != 11 or not pesel.isdigit():
+        return 0
 
-    Args:
-        pesel (str): Numer PESEL w postaci ciągu 11 znaków.
+    wagi = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3]
+    suma = 0
 
-    Returns:
-        int: 1 jeśli numer jest poprawny, 0 jeśli nie.
-    """
-    ### TUTAJ PODAJ ROZWIĄZANIE ZADANIA
+    for i in range(10):
+        iloczyn = int(pesel[i]) * wagi[i]
+        suma += iloczyn % 10
 
-    ### return 0 - powinno być zmienione i zwrócić prawdziwy wynik (zgodny z oczekiwaniami)
-    return 0
+    cyfra_kontrolna = (10 - suma % 10) % 10
+
+    return 1 if cyfra_kontrolna == int(pesel[-1]) else 0
+
 
 
 # Przykładowe wywołanie:
